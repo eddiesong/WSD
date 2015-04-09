@@ -1,0 +1,120 @@
+UNI: ps2839
+Name: Peng Song
+
+
+Usage: python main.py <training_file> <test_file> <output_file> <language>
+
+
+Here are the baseline scores from running baseline.py:
+
+English baseline: 0.535
+Catalan baseline: 0.678
+Spanish baseline: 0.684
+
+Here are the scores using default classifier without any features:
+
+English SVC: 0.620
+English KNN: 0.570
+
+Catalan SVC: 0.824
+Catalan KNN: 0.705
+
+Spanish SVC: 0.783
+Spanish KNN: 0.697
+
+With different features implemented, and different combinations of them, the scores are as follows:
+
+STOP_WORD
+
+English SVC: 0.615
+English KNN: 0.526
+
+Spanish SVC: 0.785
+Spanish KNN: 0.678
+
+LOWER CASE & STOP_WORD
+
+English SVC: 0.614
+English KNN: 0.536
+
+Spanish SVC: 0.789
+Spanish KNN: 0.686
+
+LOWER CASE
+
+Catalan SVC: 0.826
+Catalan KNN: 0.703
+
+LOWER CASE & STOP_WORD & STEMMING
+
+English SVC: 0.621
+English KNN: 0.527
+
+Spanish SVC: 0.802
+Spanish KNN: 0.696
+
+LOWER CASE & STOP_WORD & STEMMING (ignore stopwords)
+
+English SVC: 0.620
+English KNN: 0.537
+
+Spanish SVC: 0.798
+Spanish KNN: 0.697
+
+STEMMING
+
+English SVC: 0.620
+English KNN: 0.566
+
+Spanish SVC: 0.794
+Spanish KNN: 0.701
+
+LOWER CASE & STOP_WORD & STEMMING & REMOVE PUNCTUATION
+
+English SVC: 0.628
+English KNN: 0.538
+
+Spanish SVC: 0.803
+Spanish KNN: 0.670
+
+LOWER CASE & REMOVE PUNCTUATION
+
+Catalan SVC: 0.818
+Catalan KNN: 0.714
+
+LOWER CASE & STOP_WORD & STEMMING & REMOVE PUNCTUATION & RELEVANCE (HIGHEST)
+
+English SVC: 0.556
+English KNN: 0.430
+
+LOWER CASE & STOP_WORD & STEMMING & REMOVE PUNCTUATION & RELEVANCE (>=0)
+
+English SVC: 0.596
+English KNN: 0.504
+
+Spanish SVC: 0.701
+Spanish KNN: 0.685
+
+LOWER CASE & STOP_WORD & STEMMING & REMOVE PUNCTUATION & RELEVANCE (NOT LOWEST)
+
+English SVC: 0.585
+English KNN: 0.537
+
+
+From above, we can draw the conclusion that one feature might have different impact on different languages. So there is no such combination that can receive highest precision among all the languages. As for the relevance score, the result shows that you can get a slight improvement if you add more features, but the improvement seems too little to impact the whole result. Also with a full feature set, we might have a more comprehensive understanding of the data set. Therefore even though I tried different portion of "top k" relevance word set, they are not as good as the full feature set. So the final implementation for different languages are as follows:  
+
+
+English(SVC) - Removed stop words, snowball stemming, remove punctuations, lower case
+ precision: 0.628 (1246.00 correct of 1985.00 attempted)
+ recall: 0.628 (1246.00 correct of 1985.00 in total)
+ attempted: 100.00 % (1985.00 attempted of 1985.00 in total)
+
+Spanish(SVC) - Removed stop words, snowball stemming, remove punctuations, lower case
+ precision: 0.803 (1692.00 correct of 2107.00 attempted)
+ recall: 0.803 (1692.00 correct of 2107.00 in total)
+ attempted: 100.00 % (2107.00 attempted of 2107.00 in total)
+
+Catalan(SVC) - Lower case
+ precision: 0.826 (936.00 correct of 1133.00 attempted)
+ recall: 0.826 (936.00 correct of 1133.00 in total)
+ attempted: 100.00 % (1133.00 attempted of 1133.00 in total)
